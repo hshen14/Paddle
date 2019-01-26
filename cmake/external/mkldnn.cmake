@@ -56,7 +56,7 @@ ExternalProject_Add(
     ${EXTERNAL_PROJECT_LOG_ARGS}
     DEPENDS             ${MKLDNN_DEPENDS}
     GIT_REPOSITORY      "https://github.com/intel/mkl-dnn.git"
-    GIT_TAG             "830a10059a018cd2634d94195140cf2d8790a75a"
+    GIT_TAG             "fa5f6313d6b65e8f6444c6900432fb07ef5661e5"
     PREFIX              ${MKLDNN_SOURCES_DIR}
     UPDATE_COMMAND      ""
     CMAKE_ARGS          -DCMAKE_CXX_COMPILER=${CMAKE_CXX_COMPILER}
@@ -101,7 +101,8 @@ ADD_DEPENDENCIES(mkldnn ${MKLDNN_PROJECT})
 # copy the real so.0 lib to install dir
 # it can be directly contained in wheel or capi
 if(WIN32)
-    SET(MKLDNN_SHARED_LIB ${MKLDNN_INSTALL_DIR}/lib/mkldnn.dll)
+    # change lib to bin from v17.2+
+    SET(MKLDNN_SHARED_LIB ${MKLDNN_INSTALL_DIR}/bin/mkldnn.dll)
 else(WIN32)
     SET(MKLDNN_SHARED_LIB ${MKLDNN_INSTALL_DIR}/libmkldnn.so.0)
     ADD_CUSTOM_COMMAND(OUTPUT ${MKLDNN_SHARED_LIB}
